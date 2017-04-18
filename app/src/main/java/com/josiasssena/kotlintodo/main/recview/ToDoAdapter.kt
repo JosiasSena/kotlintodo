@@ -55,7 +55,7 @@ class ToDoAdapter : RecyclerView.Adapter<TodoViewHolder>() {
                     realm.executeTransaction {
                         todo.title = etTitle.text.toString()
                         todo.body = etBody.text.toString()
-                        notifyDataSetChanged()
+                        notifyItemChanged(todoList.indexOf(todo))
                     }
                 })
                 .show()
