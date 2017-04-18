@@ -59,8 +59,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
         addTodoDialog = AlertDialog.Builder(this)
                 .setView(body)
-                .setTitle("Add new ToDo item")
-                .setPositiveButton("Save", { dialog, which ->
+                .setTitle(R.string.add_new_todo)
+                .setPositiveButton(R.string.save, { dialog, which ->
                     val todo = Todo()
                     todo.title = etTitle.text.toString()
                     todo.body = etBody.text.toString()
