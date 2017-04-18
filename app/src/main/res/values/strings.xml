@@ -7,4 +7,5 @@
     <string name="delete_dialog_body">Are you sure you want to delete this ToDo item?</string>
     <string name="edit_todo">Edit ToDo</string>
     <string name="save">Save</string>
+    <string name="add_new_todo">Add new ToDo item</string>
 </resources>
