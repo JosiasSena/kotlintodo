@@ -31,9 +31,10 @@ class ToDoAdapter : RecyclerView.Adapter<TodoViewHolder>() {
         holder.body.text = todo.body
 
         holder.itemView.setOnLongClickListener {
-            displayDeleteDialog(holder.itemView.context, position)
+            displayDeleteTodoDialog(holder.itemView.context, todo)
             true
         }
+
         holder.itemView.setOnClickListener {
             displayEditTodoDialog(holder.itemView.context, todo)
         }
@@ -54,21 +55,21 @@ class ToDoAdapter : RecyclerView.Adapter<TodoViewHolder>() {
                     realm.executeTransaction {
                         todo.title = etTitle.text.toString()
                         todo.body = etBody.text.toString()
-                        notifyDataSetChanged()
+                        notifyItemChanged(todoList.indexOf(todo))
                     }
                 })
                 .show()
     }
 
-    private fun displayDeleteDialog(context: Context, position: Int) {
+    private fun displayDeleteTodoDialog(context: Context, todo: Todo) {
         AlertDialog.Builder(context)
                 .setCancelable(false)
                 .setTitle(context.getString(R.string.delete_dialog_titile))
                 .setMessage(context.getString(R.string.delete_dialog_body))
                 .setPositiveButton(android.R.string.ok, { dialog, which ->
                     realm.executeTransaction {
-                        todoList[position].deleteFromRealm()
-                        notifyItemRemoved(position)
+                        notifyItemRemoved(todoList.indexOf(todo))
+                        todo.deleteFromRealm()
                     }
                 })
                 .setNegativeButton(android.R.string.cancel, { dialog, which ->
