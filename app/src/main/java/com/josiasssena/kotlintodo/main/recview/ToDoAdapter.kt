@@ -51,7 +51,7 @@ class ToDoAdapter : RecyclerView.Adapter<TodoViewHolder>() {
         AlertDialog.Builder(context)
                 .setView(body)
                 .setTitle(context.getString(R.string.edit_todo))
-                .setPositiveButton(context.getString(R.string.save), { _, _ ->
+                .setPositiveButton(context.getString(R.string.save), { dialog, which ->
                     realm.executeTransaction {
                         todo.title = etTitle.text.toString()
                         todo.body = etBody.text.toString()
@@ -66,13 +66,13 @@ class ToDoAdapter : RecyclerView.Adapter<TodoViewHolder>() {
                 .setCancelable(false)
                 .setTitle(context.getString(R.string.delete_dialog_titile))
                 .setMessage(context.getString(R.string.delete_dialog_body))
-                .setPositiveButton(android.R.string.ok, { _, _ ->
+                .setPositiveButton(android.R.string.ok, { dialog, which ->
                     realm.executeTransaction {
                         notifyItemRemoved(todoList.indexOf(todo))
                         todo.deleteFromRealm()
                     }
                 })
-                .setNegativeButton(android.R.string.cancel, { dialog, _ ->
+                .setNegativeButton(android.R.string.cancel, { dialog, which ->
                     dialog.dismiss()
                 })
                 .show()
