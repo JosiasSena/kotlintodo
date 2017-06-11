@@ -5,7 +5,6 @@ import com.josiasssena.kotlintodo.realm.RealmModule
 import io.realm.Realm
 import io.realm.RealmConfiguration
 
-
 /**
  * @author Josias Sena
  */

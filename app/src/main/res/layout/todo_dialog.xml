@@ -3,7 +3,8 @@
     style="@style/Theme.AppCompat.Dialog"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:padding="16dp">
 
     <EditText
         android:id="@+id/et_title"
@@ -16,10 +17,8 @@
         android:id="@+id/et_body"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="top|start"
         android:hint="@string/body"
         android:inputType="textMultiLine"
-        android:lines="5"
         android:maxLines="100"/>
 
 </LinearLayout>
