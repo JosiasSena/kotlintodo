@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.EditText
+import com.google.firebase.database.FirebaseDatabase
 import com.josiasssena.kotlintodo.R
 import com.josiasssena.kotlintodo.core.Todo
 import com.josiasssena.kotlintodo.realm.TodoRealmManager
@@ -56,6 +57,11 @@ class ToDoAdapter : RecyclerView.Adapter<TodoViewHolder>() {
                         todo.title = etTitle.text.toString()
                         todo.body = etBody.text.toString()
                         notifyItemChanged(todoList.indexOf(todo))
+
+                        FirebaseDatabase.getInstance()
+                                .getReference("todos")
+                                .child(todo.id)
+                                .setValue(todo)
                     }
                 })
                 .show()
@@ -68,8 +74,15 @@ class ToDoAdapter : RecyclerView.Adapter<TodoViewHolder>() {
                 .setMessage(context.getString(R.string.delete_dialog_body))
                 .setPositiveButton(android.R.string.ok, { dialog, which ->
                     realm.executeTransaction {
+                        val id = todo.id
+
                         notifyItemRemoved(todoList.indexOf(todo))
                         todo.deleteFromRealm()
+
+                        FirebaseDatabase.getInstance()
+                                .getReference("todos")
+                                .child(id)
+                                .removeValue()
                     }
                 })
                 .setNegativeButton(android.R.string.cancel, { dialog, which ->
