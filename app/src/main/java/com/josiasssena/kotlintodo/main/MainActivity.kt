@@ -110,7 +110,13 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 .setTitle(R.string.add_new_todo)
                 .setPositiveButton(R.string.save, { _, _ ->
                     val todo = Todo()
-                    todo.title = etTitle.text.toString()
+
+                    if (etTitle.text.toString().isEmpty()) {
+                        todo.title = "(Empty)"
+                    } else {
+                        todo.title = etTitle.text.toString()
+                    }
+
                     todo.body = etBody.text.toString()
 
                     TodoRealmManager().insertTodo(todo)
