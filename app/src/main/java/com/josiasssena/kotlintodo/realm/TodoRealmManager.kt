@@ -3,7 +3,6 @@ package com.josiasssena.kotlintodo.realm
 import com.google.firebase.database.FirebaseDatabase
 import com.josiasssena.kotlintodo.core.Todo
 import io.realm.Realm
-import java.util.*
 
 /**
  * @author Josias Sena
